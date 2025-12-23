@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "d5b95e92-3094-4bd3-a891-80fc50197b4a",
+		"name": "recipes collections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50936346",
+		"_collection_link": "https://santhoshkrishnan18052005-8907999.postman.co/workspace/470eef4b-2603-43a8-8e85-8b57ada734bf/collection/50936346-d5b95e92-3094-4bd3-a891-80fc50197b4a?action=share&source=collection_link&creator=50936346"
+	},
+	"item": [
+		{
+			"name": "Create Recipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Masala Dosa\",\r\n    \"ingredients\": [\"Rice\", \"Urad Dal\", \"Potato\"],\r\n    \"instructions\": \"Make batter and fry\",\r\n    \"cookingTime\": 20,\r\n    \"difficulty\": \"Medium\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Recipes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/recipes/694a5f47a5bc7baa98870a41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"recipes",
+						"694a5f47a5bc7baa98870a41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single Recipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/recipes/694a5f47a5bc7baa98870a41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"recipes",
+						"694a5f47a5bc7baa98870a41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Recipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Idli\",\r\n    \"ingredients\": [\"Rice\", \"Dal\"],\r\n    \"instructions\": \"Steam the batter well\",\r\n    \"cookingTime\": 25,\r\n    \"difficulty\": \"Easy\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/recipes/694a5f47a5bc7baa98870a41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"recipes",
+						"694a5f47a5bc7baa98870a41"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Recipe",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/recipes/694a5f47a5bc7baa98870a41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"recipes",
+						"694a5f47a5bc7baa98870a41"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

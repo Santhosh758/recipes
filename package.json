@@ -14,9 +14,17 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "mongoose": "^8.0.2"
+    "mongoose": "^8.20.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Santhosh758/recipes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Santhosh758/recipes/issues"
+  },
+  "homepage": "https://github.com/Santhosh758/recipes#readme"
 }
