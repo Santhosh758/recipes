@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-app.use(express.json()); // JSON data-va handle panna ithu mukkiyam
+app.use(express.json());
 
 // 1. Database Connection
 const mongoURI = process.env.MONGODB_URI;
@@ -16,7 +16,7 @@ mongoose.connect(mongoURI)
     console.error("❌ DATABASE ERROR: ", err.message);
   });
 
-// 2. Recipe Schema & Model (Database structure)
+// 2. Recipe Schema & Model
 const recipeSchema = new mongoose.Schema({
     name: { type: String, required: true },
     ingredients: [String],
@@ -28,12 +28,13 @@ const recipeSchema = new mongoose.Schema({
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
 // 3. Routes
-// Home Route
+
+// A. Home Route
 app.get('/', (req, res) => {
-    res.send('<h1>Recipe App Server is Running & DB is Connected!</h1>');
+    res.send('<h1>Recipe App Server is Running & DB is Connected!</h1><p>Go to /recipes to see data</p>');
 });
 
-// GET all recipes from Database
+// B. GET all recipes (Inga thaan munnadi empty [] vanthuchi)
 app.get('/recipes', async (req, res) => {
     try {
         const recipes = await Recipe.find();
@@ -43,20 +44,29 @@ app.get('/recipes', async (req, res) => {
     }
 });
 
-// POST a new recipe (Database-la add panna)
-app.post('/recipes', async (req, res) => {
-    const recipe = new Recipe({
-        name: req.body.name,
-        ingredients: req.body.ingredients,
-        instructions: req.body.instructions,
-        cookingTime: req.body.cookingTime
-    });
+// C. SEED Route (Database-la data-va insert panna intha link-ai oru vaati click pannanum)
+app.get('/seed', async (req, res) => {
+    const sampleRecipes = [
+        {
+            name: "Tomato Pasta",
+            ingredients: ["Pasta", "Tomato", "Garlic", "Basil"],
+            instructions: "Boil pasta, saute garlic and tomatoes, mix together.",
+            cookingTime: 20
+        },
+        {
+            name: "Masala Chai",
+            ingredients: ["Milk", "Tea powder", "Ginger", "Cardamom"],
+            instructions: "Boil milk with tea and spices, strain and serve.",
+            cookingTime: 10
+        }
+    ];
 
     try {
-        const newRecipe = await recipe.save();
-        res.status(201).json(newRecipe);
+        await Recipe.deleteMany({}); // Pazhaya data-va clear panna
+        const createdRecipes = await Recipe.insertMany(sampleRecipes);
+        res.json({ message: "Sample recipes added successfully!", data: createdRecipes });
     } catch (err) {
-        res.status(400).json({ message: "Error saving recipe", error: err.message });
+        res.status(500).json({ error: err.message });
     }
 });
 
