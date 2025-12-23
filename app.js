@@ -1,17 +1,31 @@
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); // Ithu thaan Render-la neenga kudutha 'MONGODB_URI'-ai edukkum
+require('dotenv').config(); // Render environment variables-ai read panna
 
 const app = express();
+app.use(express.json()); // JSON data-va handle panna ithu thevai
 
-// Database link-ai variable-ah edukkum
+// Render-la neenga kudutha Key 'MONGODB_URI'
 const mongoURI = process.env.MONGODB_URI;
 
 mongoose.connect(mongoURI)
   .then(() => {
     console.log("MongoDB Connected Successfully!");
-    
-    // Database connect aanathuku apram thaan server start aaganum
+
+    // 1. Home Route (Browser-la main link open panna ithu kaattum)
+    app.get('/', (req, res) => {
+      res.send('Recipe App Server is Running Successfully!');
+    });
+
+    // 2. Recipes List Route
+    app.get('/recipes', (req, res) => {
+      res.json({ 
+        message: "Recipes list inga varum",
+        status: "success"
+      });
+    });
+
+    // 3. Server Start (Render-kku Port 10000 thevai)
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
@@ -20,5 +34,3 @@ mongoose.connect(mongoURI)
   .catch((err) => {
     console.error("Database Connection Error: ", err);
   });
-
-// --- Inga unga Recipes App oda matha routes (GET, POST) ezhuthunga ---
